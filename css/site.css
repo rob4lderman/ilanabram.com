@@ -1,0 +1,137 @@
+
+h3 {
+    border-bottom: solid 1px #444;
+}
+
+td {
+    padding: 0 10px 0 0;
+}
+
+em {
+    font-weight: bold;
+    /* color: #777; */
+    color: #79f;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+figure {
+    margin: 0;
+    padding: 10px 20px;
+}
+
+figcaption {
+    font-weight: bold;
+    font-style: italic;
+    font-size: small;
+}
+
+.overflowAuto {
+    overflow: auto;
+}
+ 
+.clearBoth {
+    clear: both;
+}
+
+
+/* ----------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
+
+.sectionHeader {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+    color: #79f;
+    padding: 0 140px;
+    text-align: center;
+}
+
+
+.money {
+    color: #262;
+}
+
+img.kea {
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #444;
+    height: 530px;
+    margin-right: 60px;
+    float: left;
+}
+
+
+img.headshot {
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #444;
+    height: 350px;
+    margin: 0 60px 0 20px;
+    float: left;
+}
+
+
+#contactMe {
+    float: right;
+    margin: 20px 0;
+    padding: 20px;
+    border: solid 1px #ccc;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: #ff6;
+    text-align: center;
+}
+
+img.kpaLogo {
+    width: 250px;
+    float: right;
+}
+
+img.rosey_walking {
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #444;
+    float: right;
+    height: 250px;
+    margin: 0 20px 0 50px;
+}
+
+p.booking {
+    background-color: #ff9d00;
+    padding: 10px;
+    text-align: center;
+    color: #222;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+figure.porcupine_station {
+    float: right;
+    margin-left: 40px;
+}
+
+img.porcupine_station {
+    height: 350px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #444;
+}
+
+
+/**
+ * used on main page for side-by-side <p>
+ */
+p.floatLeft {
+    float: left;
+    width: 420px;
+    padding: 15px;
+}
+
+
+#myCredentials p {
+    margin: 25px 0px;
+}

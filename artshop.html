@@ -1,0 +1,318 @@
+<html>
+<head>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'>
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <title>Ilana Bram - Artist</title>
+
+
+<style>
+
+a {
+    text-decoration: none;
+}
+
+.email {
+    text-align: center;
+    /* font-weight: bold; */
+    margin: 0 0 5px 0;
+    font-size: 1.5em;
+    font-family: "Times New Roman",Georgia,Serif;
+    color: blue;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    text-shadow: 0px 1px 1px #888888;
+}
+
+#viewCart {
+    margin: 0 40px 0 0;
+    font-weight: bold;
+    font-family: "Times New Roman",Georgia,Serif;
+    text-align: right;
+}
+
+#viewCartLink {
+    border-style: solid;
+    border-width: 0px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#viewCartLink:hover {
+    border-width: 1px;
+}
+
+#viewCartImg {
+    vertical-align: middle;
+}
+
+#buyForm {
+    font-family: Georgia,Serif;
+    border-style: solid;
+    border-width: 1px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0px 0px 4px 3px;
+}
+
+button:hover {
+    cursor:pointer;
+    cursor:hand;
+}
+
+button {
+    background-color: white;
+}
+
+.dockImage {
+    margin: 0 3px 0 0;
+    box-shadow: 2px 2px 4px #888888;
+}
+
+.viewImage {
+    margin: 0 0 14px 0;
+    box-shadow: 10px 10px 5px #888888;
+    border-style: solid;
+    border-width: 2px ; 
+    /* border-width: 1px 0px 0px 1px; */
+    border-color: black;
+}
+
+#viewingPanel {
+    height: 450px; 
+    text-align: center;
+}
+
+#buttonPanel {
+    text-align: center; 
+    margin: 0 0 8px 0;
+}
+
+</style>
+
+
+
+<script type="text/javascript">
+
+var images = new Array();
+
+
+$(document).ready(function() {
+    console.log("document is ready");
+    scanDock();
+
+    var n = 0;
+    var queryString = parseQueryString();
+    if (queryString.hasOwnProperty("n")) {
+        n = queryString.n;
+    }
+    // -rx- genButtonPanel(n);
+    genViewingPanel(n);
+});
+
+
+/**
+ * Scan the anchors/images in the dock div and add click() functions
+ * to them for updating the viewing panel.
+ */
+function scanDock() {
+    $("div#dock > a").each( updateDockAnchor );
+}
+
+
+/**
+ * Push the image in the dock anchor into the images array.
+ * Apply a click() function to the dock anchor for updating the viewing panel
+ * with the associated image.
+ */
+function updateDockAnchor(i) {
+    console.log("scanDock.each: " + i); 
+    var $img = $(this).children("img");
+    images.push($img);
+    $(this).click( function() { genViewingPanel(i); return false;} );
+}
+    
+
+/**
+ * Generate the viewing panel using the image at the given index.
+ */
+function genViewingPanel(i) {
+
+    var $div = $("div#viewingPanel");
+
+    var $img = images[i];
+
+    $div.empty().append( genViewingPanelImage($img) );
+
+    // Show BuyNow button...
+    if ($img.attr("product") != null) {
+        console.log("img contains product: " + $img.attr("product"));
+        $div.append( genBuyNowDiv($img, i) );
+    }
+
+    genButtonPanel(i);
+}
+
+
+/**
+ *
+ */
+function genBuyNowDiv($img, i) {
+
+    var price = $img.attr("price");
+    var product = $img.attr("product");
+
+    var $form = $("<form>").attr("action","http://ww7.aitsafe.com/cf/add.cfm").attr("method","post");
+
+    var $inputUserId = $("<input>").attr("type","hidden").attr("name","userid").attr("value","91276538");
+    var $inputReturn = $("<input>").attr("type","hidden").attr("name","return").attr("value","ilanabram.com/shop.html?n=" + i); // -rx- keep up to date. NOTE: seems that query string is lopped off before returning
+    var $inputProduct = $("<input>").attr("type","hidden").attr("name","product").attr("value",product);
+    var $inputPrice = $("<input>").attr("type","hidden").attr("name","price").attr("value",price);
+    var $submitButton = $("<input>").attr("type","image").attr("name","Submit").attr("src","icon/button_buynow.gif").attr("alt", "Add to cart").attr("style","vertical-align:middle");
+    // -rx- var $submitButton = $("<input>").attr("type","image").attr("name","Submit").attr("src","icon/buy.green.png").attr("alt", "ADD TO ORDER").attr("height","48px");
+
+    $form.append($inputUserId).append($inputReturn).append($inputProduct).append($inputPrice);
+
+    var $span = $("<span>").attr("id","buyForm");
+    $span.append(product + " - $" + price + " ");
+    $span.append($submitButton);
+    $form.append($span);
+
+    // <form action="http://ww#.aitsafe.com/cf/add.cfm" method="post">
+    // <input name="userid" type="hidden" value="12345678">
+    // <input name="product" type="hidden" value="Oceanmaster jacket">
+    // <input name="price" type="hidden" value="159">
+    // <input name="return" type="hidden" value="www.mals-e.com/support/help2.php">
+    // <input type="submit" value="Buy Now!">
+    // <input type="image" name="Submit" src="images/button_buynow.gif" alt="ADD TO ORDER" class="small" />
+    // </form> 
+    
+    return $form;
+}
+
+
+/**
+ * Generate the nav buttons around the given image index.
+ */
+function genButtonPanel(i) {
+
+    var prevI = (i == 0) ? (images.length-1) : (i-1);
+    var nextI = (i == (images.length-1)) ? 0 : (i+1);
+
+    console.log("genButtonPanel: prevI/i/nextI: " + prevI + "/" + i + "/" + nextI);
+
+    var $prevButton = $("<button type='button'>");
+    $prevButton.append($("<img>").attr("src","icon/left.arrow.blue.png").attr("height","32").attr("width","32"));
+    $prevButton.click(function() { genViewingPanel(prevI); } );
+
+    var $nextButton = $("<button type='button'>");
+    $nextButton.append($("<img>").attr("src","icon/right.arrow.blue.png").attr("height","32").attr("width","32"));
+    $nextButton.click(function() { genViewingPanel(nextI); } );
+
+    var $buttonPanel = $("div#buttonPanel");
+    $buttonPanel.empty().append($prevButton).append($nextButton);
+}
+    
+
+/**
+ * Generate an image for the viewing panel.
+ *
+ * TODO: could avoid the wxh calculation if I pre-define the <img> elements
+ *       and hide them until they are selected.
+ */
+function genViewingPanelImage($img) {
+
+    $img = setImgWxH($img,400);
+    $img.addClass("viewImage");
+
+    var $a = $("<a>");
+    $a.attr("href",$img.attr("src"));
+    $a.attr("target","_blank");
+
+    $a.append($img);
+
+    return $a;
+}
+
+
+/**
+ *
+ * @param $img          The $("<img>") object.
+ * @param maxD          The max dimension size.
+ *
+ * @return a copy of the $img object.
+ */
+function setImgWxH($img, height) {
+    console.log("setImgWxH: " + $img.attr("src") + ", wxh: " + $img.attr("wxh"));
+
+    var wxh = $img.attr("wxh");
+    var $imgCopy = $("<img/>").attr("src", $img.attr("src"));
+
+    $imgCopy.attr("height",height);
+    $imgCopy.attr("width", (height * wxh));
+    return $imgCopy;
+}
+
+
+/**
+ * Parse the query string.
+ *
+ * @return A map of the query parms.
+ */
+var queries = null;
+function parseQueryString() {
+
+    if (queries == null) {
+        var tmpQueries = {}
+        $.each(document.location.search.substr(1).split('&'), function(c,q) {
+            if (q != "") {
+                var i = q.split('=');
+                tmpQueries[decodeURIComponent(i[0])] = decodeURIComponent(i[1]);
+            }
+        });
+        queries = tmpQueries;
+        console.log("parseQueryString: parsed ", JSON.stringify(queries));
+    } else {
+        console.log("parseQueryString: query string already parsed", JSON.stringify(queries));
+    }
+
+    return queries;
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+    <div class="email">
+        ilana.bram@gmail.com
+    </div>
+
+    <div id="viewCart">
+        <A id="viewCartLink" HREF="http://ww7.aitsafe.com/cf/review.cfm?userid=91276538">View cart <img id="viewCartImg" src="icon/shopping.cart.png" /></A>
+    </div>
+
+    <div id="viewingPanel" >
+        <a href="images/fun.with.self.portrait.jpg" target="_blank"><img src="images/fun.with.self.portrait.jpg" height="400" width="314" class="viewImage" /></a>
+        <!-- -rx- div>BUY NOW: Portrait print 24x36in - $35</div -->
+    </div>
+
+    <div id="buttonPanel" >
+    </div>
+
+    <div id="dock" style="text-align: center; margin: 3px">
+        <a href="."><img src="images/fun.with.self.portrait.jpg" height="75" width="59" class="dockImage" product="Portrait print - 24x36in" price="15"></a>
+        <a href="."><img src="images/kat.face.stripey.jpg" height="75" width="60" class="dockImage"></a>
+        <a href="."><img src="images/pregnant.nude.stripey.large.jpg" height="75" width="49" class="dockImage"></a>
+        <a href="."><img src="images/sleeping.nude.blotch.jpg" height="75" width="94" class="dockImage"></a>
+        <a href="."><img src="images/sweeping.hair.from.behind.stripey.14x11.jpg" height="75" width="96" class="dockImage"></a>
+    </div>
+
+</body>
+</html>

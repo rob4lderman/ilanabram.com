@@ -1,0 +1,329 @@
+<html>
+<head>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'>
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <title>Ilana Bram - Artist</title>
+</head>
+
+<style>
+
+div.minwidth { 
+    min-width:2000px; 
+    width: auto !important; 
+    width: 2000px; 
+}
+    
+
+div.floatLeft {
+    float: left;
+    margin: 3px;
+}
+
+
+div {
+    border-style: dashed;
+    border-width: 1px;
+}
+
+
+div.email {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+    font-size: 1.5em;
+    font-family: "Times New Roman",Georgia,Serif;
+    color: maroon;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+}
+
+
+</style>
+
+
+
+
+<script type="text/javascript">
+
+var imageSrcs = [ "images/blue.scissors.jpg",
+                  "images/cat.snuggles.man.jpg",
+                  "images/face.hand.stripey.14x11.jpg",
+                  "images/face.profile.stripey.14x11.jpg",
+                  "images/fun.with.self.portrait.jpg",
+                  "images/horse.essence.jpg",
+                  "images/insect.stripey.14x11.jpg",
+                  "images/kat.face.stripey.jpg",
+                  "images/live.nude.jpg",
+                  "images/man.nude.hand.in.hair.jpg",
+                  "images/nude.staring.jpg",
+                  "images/persian.nude.stripey.large.jpg",
+                  "images/pregnant.nude.stripey.large.jpg",
+                  "images/relaxing.nude.stripey.14x11.jpg",
+                  "images/sleeping.nude.blotch.jpg",
+                  "images/sweeping.hair.from.behind.stripey.14x11.jpg" ];
+
+var images = new Array();
+
+
+
+$(document).ready(function() {
+    console.log("document is ready");
+    loadImages();
+});
+
+
+
+function loadImages() {
+    console.log("loadImages:");
+    for (var i=0; i < imageSrcs.length; ++i) {
+        var imgSrc = imageSrcs[i];
+        $("<img/>").attr("src", imgSrc).load( onImageLoad );
+    }
+}
+
+
+/**
+ * Compute the image's wxh ratio, then add it to the images array.
+ * 
+ * Once all images are loaded, call allImagesLoaded().
+ */
+function onImageLoad() {
+
+    $(this).attr("wxh", (this.width / this.height));
+
+    console.log("onImageLoad: " + $(this).attr("src") + ": " + $(this).attr("wxh"));
+
+    images.push($(this));
+
+    if (images.length == imageSrcs.length) {
+        allImagesLoaded();
+    }
+}
+
+
+function allImagesLoaded() {
+    console.log("allImagesLoaded:");
+
+    genViewingPanel(0);
+
+    // -rx- var $div = $("div#viewingPanel");
+    // -rx- $div.append( genViewingPanelImage( images[0] ) );
+
+    // -rx- var minWidth = images.length * (75 + 6);    // img maxD + div margin (3)
+    // -rx- $div.attr("style","text-align: center; min-width: " + minWidth + "px; width: auto !important; width: " + minWidth + "px;");
+
+
+    var $divDock = $("div#dock");
+
+    for (var i=0; i < images.length; ++i) {
+        $divDock.append(  genDockImageDiv( i ) ); 
+    }
+
+}
+
+
+function genViewingPanel(i) {
+
+    var $div = $("div#viewingPanel");
+
+    var prevI = (i == 0) ? (images.length-1) : (i-1);
+    var nextI = (i == (images.length-1)) ? 0 : (i+1);
+
+    console.log("genViewingPanel: prevI/i/nextI: " + prevI + "/" + i + "/" + nextI);
+
+    var $prevButton = genButton("<", function() { genViewingPanel(prevI); } );
+    var $nextButton = genButton(">", function() { genViewingPanel(nextI); } );
+
+    var $img = genViewingPanelImage(images[i]);
+
+    // -rx- $div.empty().append($prevButton).append($img).append($nextButton);
+    $div.empty().append($img);
+
+    var $buttonPanel = $("div#buttonPanel");
+    $buttonPanel.empty().append($prevButton).append($nextButton);
+}
+    
+
+function genViewingPanelImage($img) {
+
+    $img = setImgWxH($img,400);
+
+    // -rx- $img.attr("align","middle");
+    $img.attr("style","vertical-align: center; margin: 0 3px");
+
+    return $img;
+}
+
+
+
+function genDockImageDiv(i) {
+
+    var $a = $("<a>");
+    
+    $a.attr("href",".");
+    $a.click( function() { genViewingPanel(i); return false; });
+
+    var $img = images[i];
+
+    $img = setImgWxH($img,75);
+
+    $img.attr("style","margin: 3px");
+    $a.append($img);
+
+    return $a;
+    // -rx- var $div = $("<div>").addClass("floatLeft");
+
+    // -rx- $div.append($img);
+
+    // -rx- return $div;
+}
+
+
+/**
+ * Create a copy of the given $img, setting the width and height based
+ * on the $img's wxh attr and the maxD.
+ *
+ * @param $img          The $("<img>") object.
+ * @param maxD          The max dimension size.
+ *
+ * @return a copy of the $img object.
+ */
+function xx_setImgWxH($img, maxD) {
+    console.log("setImgWxH:");
+
+    var wxh = $img.attr("wxh");
+    var $imgCopy = $("<img/>").attr("src", $img.attr("src"));
+
+    if (wxh > 1) {
+        $imgCopy.attr("width",maxD);
+        $imgCopy.attr("height", (maxD / wxh));
+    } else {
+        $imgCopy.attr("height",maxD);
+        $imgCopy.attr("width", (maxD * wxh));
+    }
+    return $imgCopy;
+}
+
+
+/**
+ *
+ * @param $img          The $("<img>") object.
+ * @param maxD          The max dimension size.
+ *
+ * @return a copy of the $img object.
+ */
+function setImgWxH($img, height) {
+    console.log("setImgWxH:");
+
+    var wxh = $img.attr("wxh");
+    var $imgCopy = $("<img/>").attr("src", $img.attr("src"));
+
+    $imgCopy.attr("height",height);
+    $imgCopy.attr("width", (height * wxh));
+    return $imgCopy;
+}
+
+
+
+
+/**
+ * Gen a button with the given html and onClickFunc.
+ *
+ * @param html
+ * @param onClickFunc
+ */
+function genButton(html,onClickFunc) {
+    var $button = $("<button type='button'>");
+    $button.html(html);
+    $button.click(onClickFunc);
+    return $button;
+}
+
+
+
+            
+
+
+</script>
+
+
+
+
+<body>
+
+
+    <div class="email">
+        ilana.bram@gmail.com
+    </div>
+
+    <div id="viewingPanel" style="height: 400px; text-align: center">
+    </div>
+
+    <div id="buttonPanel" style="text-align: center">
+    </div>
+
+    <!-- div id="dock" class="minwidth" -->
+    <div id="dock" style="text-align: center; margin: 3px">
+    </div>
+
+
+    <!-- 
+    <div class='floatLeft'>
+        <a href="images/blue.scissors.jpg"><img src="images/blue.scissors.jpg" height="100"/></a>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/cat.snuggles.man.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/face.hand.stripey.14x11.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/face.profile.stripey.14x11.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/fun.with.self.portrait.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/horse.essence.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/insect.stripey.14x11.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/kat.face.stripey.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/live.nude.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/man.nude.hand.in.hair.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/nude.staring.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/persian.nude.stripey.large.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/pregnant.nude.stripey.large.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/relaxing.nude.stripey.14x11.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/sleeping.nude.blotch.jpg" height="100"/>
+    </div>
+    <div class='floatLeft'>
+        <img src="images/sweeping.hair.from.behind.stripey.14x11.jpg" height="100"/>
+    </div>
+    -->
+
+    <br />
+    <br />
+    <br />
+    <br />
+</body>

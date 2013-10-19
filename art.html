@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'>
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+    <link rel="stylesheet" href="css/pageContainer.css"/>
+    <link rel="stylesheet" href="css/pageHeader.css"/>
+    <link rel="stylesheet" href="css/pageContent.css"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <title>Ilana Bram - Artist</title>
+
+
+<style>
+
+.email {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+    font-size: 1.5em;
+    font-family: "Times New Roman",Georgia,Serif;
+    color: maroon;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    text-shadow: 0px 1px 1px #888888;
+}
+
+button:hover {
+    cursor:pointer;
+    cursor:hand;
+}
+
+button {
+    background-color: white;
+}
+
+.dockImage {
+    margin: 0 3px 0 0;
+    box-shadow: 2px 2px 4px #888888;
+}
+
+.viewImage {
+    margin: 0 3px 0 0;
+    box-shadow: 10px 10px 5px #888888;
+    border-style: solid;
+    border-width: 2px ; 
+    /* border-width: 1px 0px 0px 1px; */
+    border-color: black;
+}
+
+
+
+</style>
+
+
+
+<script type="text/javascript">
+
+var images = new Array();
+
+
+$(document).ready(function() {
+    console.log("document is ready");
+    scanDock();
+    genButtonPanel(0);
+});
+
+
+/**
+ * Scan the anchors/images in the dock div and add click() functions
+ * to them for updating the viewing panel.
+ */
+function scanDock() {
+    $("div#dock > a").each( updateDockAnchor );
+}
+
+
+/**
+ * Push the image in the dock anchor into the images array.
+ * Apply a click() function to the dock anchor for updating the viewing panel
+ * with the associated image.
+ */
+function updateDockAnchor(i) {
+    console.log("scanDock.each: " + i); 
+    var $img = $(this).children("img");
+    images.push($img);
+    $(this).click( function() { genViewingPanel(i); return false;} );
+}
+    
+
+/**
+ * Generate the viewing panel using the image at the given index.
+ */
+function genViewingPanel(i) {
+
+    var $div = $("div#viewingPanel");
+
+    var $img = genViewingPanelImage(images[i]);
+
+    $div.empty().append($img);
+
+    genButtonPanel(i);
+}
+
+
+/**
+ * Generate the nav buttons around the given image index.
+ */
+function genButtonPanel(i) {
+
+    var prevI = (i == 0) ? (images.length-1) : (i-1);
+    var nextI = (i == (images.length-1)) ? 0 : (i+1);
+
+    console.log("genViewingPanel: prevI/i/nextI: " + prevI + "/" + i + "/" + nextI);
+
+    var $prevButton = $("<button type='button'>");
+    $prevButton.append($("<img>").attr("src","icon/left.arrow.blue.png").attr("height","32").attr("width","32"));
+    $prevButton.click(function() { genViewingPanel(prevI); } );
+
+    var $nextButton = $("<button type='button'>");
+    $nextButton.append($("<img>").attr("src","icon/right.arrow.blue.png").attr("height","32").attr("width","32"));
+    $nextButton.click(function() { genViewingPanel(nextI); } );
+
+    var $buttonPanel = $("div#buttonPanel");
+    $buttonPanel.empty().append($prevButton).append($nextButton);
+}
+    
+
+/**
+ * Generate an image for the viewing panel.
+ *
+ * TODO: could avoid the wxh calculation if I pre-define the <img> elements
+ *       and hide them until they are selected.
+ */
+function genViewingPanelImage($img) {
+
+    $img = setImgWxH($img,400);
+    $img.addClass("viewImage");
+
+    var $a = $("<a>");
+    $a.attr("href",$img.attr("src"));
+    $a.attr("target","_blank");
+
+    $a.append($img);
+
+    return $a;
+}
+
+
+
+/**
+ *
+ * @param $img          The $("<img>") object.
+ * @param maxD          The max dimension size.
+ *
+ * @return a copy of the $img object.
+ */
+function setImgWxH($img, height) {
+    console.log("setImgWxH:");
+
+    var wxh = $img.attr("wxh");
+    var $imgCopy = $("<img/>").attr("src", $img.attr("src"));
+
+    $imgCopy.attr("height",height);
+    $imgCopy.attr("width", (height * wxh));
+    return $imgCopy;
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+    <div id="pageContainer">
+        <div id="pageHeader">
+            <div id="pageHeaderLeft">
+            </div>
+            <div id="pageHeaderRight">
+                <div id="pageHeaderRightInner">
+                </div>
+            </div>
+            <div id="pageHeaderNav">
+                <div id="pageHeaderNavInner">
+                    <a href="index.html">HOME</a><a href="training.html">ANIMAL TRAINING</a><a href="http://www.youtube.com/user/ratDreams" target="_blank">YouTube</a><a href="art.html">ART</a><a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- div class="email">
+        ilana.bram@gmail.com
+    </div -->
+    <div id="pageContent">
+
+        <div id="viewingPanel" style="height: 400px; text-align: center;  padding-top: 10px;">
+            <a href="images/fun.with.self.portrait.jpg" target="_blank"><img src="images/fun.with.self.portrait.jpg" height="400" width="314" class="viewImage" /></a>
+        </div>
+
+        <div id="buttonPanel" style="text-align: center; margin: 16px 0 8px 0">
+        </div>
+
+        <div id="dock" style="text-align: center; margin: 3px">
+            <a href="."><img src="images/fun.with.self.portrait.jpg" height="75" width="59" class="dockImage"></a>
+            <!-- a href="."><img src="images/face.profile.stripey.14x11.jpg" height="75" width="58" class="dockImage"></a -->
+            <!-- a href="."><img src="images/face.hand.stripey.14x11.jpg" height="75" width="97" class="dockImage"></a -->
+            <!-- a href="."><img src="images/live.nude.jpg" height="75" width="56" class="dockImage"></a -->
+            <!-- a href="."><img src="images/blue.scissors.jpg" height="75" width="87" class="dockImage"></a -->
+            <!-- a href="."><img src="images/horse.essence.jpg" height="75" width="56" class="dockImage"></a -->
+            <!-- a href="."><img src="images/cat.snuggles.man.jpg" height="75" width="96" class="dockImage"></a -->
+            <!-- a href="."><img src="images/insect.stripey.14x11.jpg" height="75" width="96" class="dockImage"></a -->
+            <a href="."><img src="images/kat.face.stripey.jpg" height="75" width="60" class="dockImage"></a>
+            <!-- a href="."><img src="images/man.nude.hand.in.hair.jpg" height="75" width="51" class="dockImage"></a -->
+            <!-- a href="."><img src="images/nude.staring.jpg" height="75" width="49" class="dockImage"></a -->
+            <!-- a href="."><img src="images/persian.nude.stripey.large.jpg" height="75" width="50" class="dockImage"></a -->
+            <a href="."><img src="images/pregnant.nude.stripey.large.jpg" height="75" width="49" class="dockImage"></a>
+            <!-- a href="."><img src="images/relaxing.nude.stripey.14x11.jpg" height="75" width="96" class="dockImage"></a -->
+            <a href="."><img src="images/sleeping.nude.blotch.jpg" height="75" width="94" class="dockImage"></a>
+            <a href="."><img src="images/sweeping.hair.from.behind.stripey.14x11.jpg" height="75" width="96" class="dockImage"></a>
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+</html>

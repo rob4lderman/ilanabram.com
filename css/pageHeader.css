@@ -1,0 +1,74 @@
+
+
+/* background-image: url("../images/pageHeaderBG.150.jpg"); */
+#pageHeader {
+    height: 450px;
+}
+
+#banner {
+    position: relative;
+}
+
+#nameInBanner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    text-align: right;
+    color: white;
+    text-shadow: 1px 0px black;
+    margin: 10px;
+    border: none;
+}
+
+#pageHeaderLeft {
+    float: left;
+    width: 350px;
+    height: 100%;
+}
+
+#pageHeaderLeftInner {
+    height: 100%;
+    margin: 0 5px;
+    border: solid 1px #eee;
+}
+
+#pageHeaderRight {
+    float: left;
+    width: 650px;
+    height: 125px;
+}
+
+#pageHeaderRightInner {
+    margin: 0 5px;
+    height: 100%;
+}
+
+#pageHeaderNav {
+    float: left;
+    width: 650px;
+}
+
+#pageHeaderNavInner {
+    padding: 0 5px;
+}
+
+#pageHeaderNavInner a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 12px;
+    border-right: solid 1px #ccc;
+    letter-spacing: 1px;
+}
+
+#pageHeaderNavInner a:hover {
+    background-color: yellow;
+    text-decoration: underline;
+}
+
+#pageHeaderNavInner a:last-child {
+    border-right: none;
+}
+
+
+
