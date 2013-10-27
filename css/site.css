@@ -4,7 +4,7 @@ h3 {
 }
 
 td {
-    padding: 0 10px 0 0;
+    padding: 0 30px 0 0;
 }
 
 em {
@@ -127,11 +127,29 @@ img.porcupine_station {
  */
 p.floatLeft {
     float: left;
-    width: 420px;
-    padding: 15px;
+    width: 400px;
+    padding: 25px;
 }
 
 
 #myCredentials p {
     margin: 25px 0px;
+}
+
+
+#keaContainer {
+    position: relative;
+    float: left;
+}
+
+#keaContainer p {
+    margin: 0px;
+    position: absolute;
+    bottom: 5px;
+    right: 85px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: small;
+    text-shadow: 1px 0px black;
 }
