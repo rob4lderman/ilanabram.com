@@ -20,6 +20,11 @@
 #
 
 
+if [ -z $1 ]; then
+    echo "usage: ./sync.sh <user> <pass>"
+    exit 1
+fi
+
 HOST=ilanabram.com
 LDIR=/easy/ilanabram.com
 RDIR=/

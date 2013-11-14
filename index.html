@@ -2,6 +2,11 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta property="og:url" content="http://ilanabram.com/" />
+    <meta property="og:image" content="http://ilanabram.com/images/ilana.with.fox.jpg" />
+    <meta property="og:title" content="Dog Training with Ilana Bram" />
+    <meta property="og:site_name" content="Ilana Bram" />
+    
     <title>Ilana Bram</title>
 
     <link rel='icon' href='favicon.ico' type='image/x-icon'>
@@ -13,13 +18,48 @@
 </head>
 
 <body class="index">
+<!-- Begin FB code -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : 173192069554955,                      // App ID from the app dashboard
+      channelUrl : null, // '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+
+  // Load the SDK asynchronously
+  (function(){
+     // If we've already installed the SDK, we're done
+     if (document.getElementById('facebook-jssdk')) {return;}
+
+     // Get the first script element, which we'll use to find the parent node
+     var firstScriptElement = document.getElementsByTagName('script')[0];
+
+     // Create a new script element and set its id
+     var facebookJS = document.createElement('script'); 
+     facebookJS.id = 'facebook-jssdk';
+
+     // Set the new script's source to the source of the Facebook JS SDK
+     facebookJS.src = 'http://connect.facebook.net/en_US/all.js';    // TODO: remove http: when ready to publish
+
+     // Insert the Facebook JS SDK into the DOM
+     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+   }());
+</script>
+<!-- End FB code -->
+    
     <div id="pageContainer">
         <div id="banner">
             <img src="images/ilana.with.fox.jpg" />
             <h3 id="nameInBanner">Ilana Bram &middot; Certified Animal Trainer</h3>
         </div>
         <div id="pageContent">
-
             <div class="overflowAuto">
                 <p class="sectionHeader">
                     Begin a wonderful new relationship with your dog based on cooperation and trust
@@ -88,10 +128,10 @@
                 <p>
                     Graduated with perfect scores from the 6-month Dog Trainer Professional course at 
                     <a href="https://www.karenpryoracademy.com/about">Karen Pryor Academy for Animal Training and Behavior</a>. 
-                    <a href="http://www.clickertraining.com/karen">Karen Pryor</a> is a pioneer in the development of force-free training methods. Her work with dolphins in the
-                    1960s revolutionized animal training by pioneering and popularizing force-free training methods based on operant
-                    conditioning and the conditioned reinforcer. <!-- She is an inspiration, and her book 
-                    <a href="http://www.amazon.com/Dont-Shoot-Dog-Teaching-Training/dp/0553380397/ref=sr_1_1?s=books&ie=UTF8&qid=1382121700&sr=1-1&keywords=don%27t+shoot+the+dog"><i>Don't Shoot the Dog</i></a> changed my life. -->
+                    <a href="http://www.clickertraining.com/karen">Karen Pryor</a>, the author of 
+                    <a href="http://www.amazon.com/Dont-Shoot-Dog-Teaching-Training/dp/0553380397/ref=sr_1_1?s=books&ie=UTF8&qid=1382121700&sr=1-1&keywords=don%27t+shoot+the+dog"><i>Don't Shoot the Dog</i></a> 
+                    and one of the founders of clicker training, is a leading spokesperson and teacher for effective force-free training 
+                    based on operant conditioning and the conditioned reinforcer.  
                 </p>
                 <p>
                     Studied <a href="http://drsophiayin.com/about">Dr. Sophia Yin's</a> materials on counterconditioning and management, <i>Low Stress Handling, 
@@ -135,6 +175,10 @@
                         apply to my scholarship fund by email, detailing your circumstances and training needs.
                 </small></small>
                 </p>
+
+                <!-- Begin FB code -->
+                <div class="fb-like-box" data-href="https://www.facebook.com/IlanaAnimalTraining" data-width="300" data-height="80" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="false" data-show-border="true"></div>
+                <!-- End FB code -->
             </div>
         </div>
     </div>
