@@ -133,7 +133,7 @@ p.floatLeft {
 
 
 #myCredentials p {
-    margin: 25px 0px;
+    margin: 40px 0px;
 }
 
 
@@ -152,4 +152,48 @@ p.floatLeft {
     font-style: italic;
     font-size: small;
     text-shadow: 1px 0px black;
+}
+
+div {
+    
+}
+
+.memberOf {
+    float: left;
+    text-align: center;
+    width: 255px;
+    height: 160px;
+}
+
+.memberOf figcaption {
+    color: #ff9d00;
+    font-style: normal;
+}
+
+.memberOfImageDiv {
+    height: 160px;
+    line-height: 160px;
+    
+}
+
+.kpaLogo1 {
+    float: right;
+    margin: 0 10px 0 30px;
+}
+
+
+.russellSageLogo {
+    width: 300px;
+    float: right;
+    margin: 0px 10px 0px 20px;
+}
+
+
+
+.fbLikeBoxContainer {
+    float: right;
+}
+
+.fbLikeBoxContainer span {
+    font-size: small;
 }
