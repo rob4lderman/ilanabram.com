@@ -2,9 +2,11 @@
 #
 # Usage: 
 # $ cd ilanabram.com
-# $ ./sync.sh <user> <pass>
+# $ ./sync.sh 
 #
 # NOTE: as currently written, this script must be run from the source dir.
+#
+# NOTE: use ssh or .netrc for lftp authentication
 #
 # NOTE: LFTP: if you specify a source-dir without a target-dir, then LFTP will append
 #       the basename of the source-dir to the target-dir name (since target-dir is unspecified,
@@ -19,22 +21,14 @@
 #
 #
 
-
-if [ -z $1 ]; then
-    echo "usage: ./sync.sh <user> <pass>"
-    exit 1
-fi
-
 HOST=ilanabram.com
 LDIR=/easy/ilanabram.com
 RDIR=/
-USER="$1"
-PASS="$2"
 
 lftp -c "
-open $HOST
-user $USER $PASS
-mirror --reverse --exclude sync.sh --exclude .git --exclude-glob .git* --exclude-glob *.swp 
-"
+set mirror:parallel-directories true;
+open $HOST;
+mirror --reverse --parallel=8 --verbose=1 --exclude sync.sh --exclude .git --exclude-glob .git* --exclude-glob *.swp 
+" 
 
 
