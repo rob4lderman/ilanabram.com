@@ -128,7 +128,7 @@ img.porcupine_station {
  */
 p.floatLeft {
     float: left;
-    width: 400px;
+    width: 405px;
     padding: 25px;
 }
 
@@ -141,7 +141,7 @@ p.floatLeft {
 #keaContainer {
     position: relative;
     float: right;
-    margin: 40px 10px 0px 0;
+    margin: 0px 10px 0px 0;
 }
 
 #keaContainer img {
@@ -191,7 +191,7 @@ div {
 .russellSageLogo {
     width: 300px;
     float: right;
-    margin: 0px 10px 0px 20px;
+    margin: 0px 10px 0px 40px;
 }
 
 
