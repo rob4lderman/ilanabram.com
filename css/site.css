@@ -1,16 +1,19 @@
 
-h3 {
+
+.borderBottom {
     border-bottom: solid 1px #444;
 }
+
+
 
 td {
     padding: 0 30px 0 0;
 }
 
 em {
-    font-weight: bold;
+    font-weight: normal;
     /* color: #777; */
-    color: #79f;
+    color: #29f;
     font-style: normal;
 }
 
@@ -43,12 +46,12 @@ figcaption {
 /* ----------------------------------------------------------------------------------- */
 
 .sectionHeader {
-    font-style: italic;
-    font-weight: bold;
-    font-size: 20px;
-    color: #79f;
-    padding: 0 140px;
+    font-style: normal;
+    font-size: 22px;
+    color: #49f;
+    padding: 30px 140px;
     text-align: center;
+    margin:0px;
 }
 
 
@@ -102,10 +105,11 @@ img.rosey_walking {
 }
 
 p.booking {
-    background-color: #ff9d00;
+    background-color: #eee; 
     padding: 10px;
     text-align: center;
     color: #222;
+    border: solid 3px #ff9d00;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
@@ -126,10 +130,10 @@ img.porcupine_station {
 /**
  * used on main page for side-by-side <p>
  */
-p.floatLeft {
-    float: left;
+.p405 {
     width: 405px;
     padding: 25px;
+    margin: 0px;
 }
 
 
@@ -141,7 +145,7 @@ p.floatLeft {
 #keaContainer {
     position: relative;
     float: right;
-    margin: 0px 10px 0px 0;
+    margin: 0px 0px 0px 0;
 }
 
 #keaContainer img {
@@ -160,9 +164,7 @@ p.floatLeft {
     text-shadow: -1px 1px black;
 }
 
-div {
-    
-}
+
 
 .memberOf {
     float: left;
@@ -235,3 +237,12 @@ div {
 
 
 
+
+h2 {
+    font-weight: normal;
+}
+
+a,
+a:visited {
+    color: #c60;
+}
