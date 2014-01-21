@@ -105,13 +105,14 @@ img.rosey_walking {
 }
 
 p.booking {
-    background-color: #eee; 
+    background-color: rgba(252, 245, 172, 0.55); 
     padding: 10px;
     text-align: center;
     color: #222;
     border: solid 3px #ff9d00;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    line-height: 22px;
 }
 
 figure.porcupine_station {
@@ -192,7 +193,7 @@ img.porcupine_station {
 
 .russellSageLogo {
     width: 300px;
-    float: right;
+    float: right; 
     margin: 0px 10px 0px 40px;
 }
 
@@ -245,4 +246,36 @@ h2 {
 a,
 a:visited {
     color: #c60;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.socialIcons {
+    text-align: center;
+    padding: 15px 0 5px 0;
+    border-top: solid 1px #aaa;
+    border-bottom: solid 1px #aaa;
+}
+
+.socialIcons img {
+    margin: 8px;
+}
+
+.socialIcons a:hover {
+    opacity: .8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.credentials div {
+    width: 300px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+
+}
+
+.credentials p {
+    margin-top: 30px;
 }
